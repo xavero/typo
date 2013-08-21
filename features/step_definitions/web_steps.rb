@@ -41,6 +41,20 @@ Given /^the blog is set up$/ do
                 :profile_id => 1,
                 :name => 'admin',
                 :state => 'active'})
+                
+  User.create!({:login => 'author1',
+                :password => 'aaaaaaaa',
+                :email => 'author1@snow.com',
+                :profile_id => 2,
+                :name => 'Anyone',
+                :state => 'active'})
+                
+  User.create!({:login => 'author2',
+                :password => 'aaaaaaaa',
+                :email => 'author2@snow.com',
+                :profile_id => 3,
+                :name => 'Someone',
+                :state => 'active'})
 end
 
 And /^I am logged into the admin panel$/ do
