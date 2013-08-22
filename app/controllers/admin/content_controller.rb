@@ -28,13 +28,26 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def edit
-    @article = Article.find(params[:id])
-    unless @article.access_by? current_user
-      redirect_to :action => 'index'
-      flash[:error] = _("Error, you are not allowed to perform this action")
-      return
+    if params[:merge_with]
+        merge
+    else
+        @article = Article.find(params[:id])
+        unless @article.access_by? current_user
+          redirect_to :action => 'index'
+          flash[:error] = _("Error, you are not allowed to perform this action")
+          return
+        end
+        new_or_edit
     end
-    new_or_edit
+  end
+  
+  #hw1
+  def merge
+    articleBase = Article.find(params[:id])
+    articleMergeWith = Article.find(params[:merge_with])
+    @article = articleBase.merge( articleMergeWith )
+    
+    redirect_to :action => 'index'
   end
 
   def destroy
@@ -176,13 +189,13 @@ class Admin::ContentController < Admin::BaseController
         return
       end
     end
-
+    
     @images = Resource.images_by_created_at.page(params[:page]).per(10)
     @resources = Resource.without_images_by_filename
     @macros = TextFilter.macro_filters
     render 'new'
   end
-
+  
   def set_the_flash
     case params[:action]
     when 'new'

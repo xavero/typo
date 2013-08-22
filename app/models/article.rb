@@ -70,6 +70,17 @@ class Article < Content
       self.settings = {}
     end
   end
+  
+  def merge( articleMergeWith )
+      mergedArticle = Article.new()
+      mergedArticle.title = self.title
+      mergedArticle.user = self.user
+      mergedArticle.body = self.body + articleMergeWith.body
+      mergedArticle.body_html = self.body_html + articleMergeWith.body_html
+      mergedArticle.comments << self.comments << articleMergeWith.comments
+      mergedArticle.save!
+      return mergedArticle
+  end
 
   def set_permalink
     return if self.state == 'draft'
