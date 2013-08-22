@@ -150,7 +150,8 @@
   
   <div class=''>
     <h4>Merge</h4>
-    <%= form_tag('merge') do -%>
+    <%= form_tag(:controller => "content", :action => "merge") do -%>
+    
         <p class='help-block'>Merge this article with another:</p>
         <input type="hidden" name="id" value="<%= @article.id %>">
         <input type="text" name="merge_with" id="merge_with" value="" />
