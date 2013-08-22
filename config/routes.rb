@@ -98,6 +98,8 @@ Rails.application.routes.draw do
   # For the tests
   get 'theme/static_view_test', :format => false
 
+  match '/admin/content/merge', :to => 'admin/content#merge'
+
   # Work around the Bad URI bug
   %w{ accounts backend files sidebar }.each do |i|
     match "#{i}", :to => "#{i}#index", :format => false
@@ -111,12 +113,6 @@ Rails.application.routes.draw do
     match "/admin/#{i}", :to => "admin/#{i}#index", :format => false
     match "/admin/#{i}(/:action(/:id))", :to => "admin/#{i}", :action => nil, :id => nil, :format => false
   end
-
-resources :admin do
-  resources :content do
-    post 'merge', :on => :merge
-  end
-end
 
   # default
   root :to  => 'articles#index', :format => false
