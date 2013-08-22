@@ -150,12 +150,12 @@
   
   <div class=''>
     <h4>Merge</h4>
-    <%= form_tag(form_action, :id => "#{form_type}_form", :enctype => "multipart/form-data", :class => className) do %>
+    <%= form_tag('merge') do -%>
         <p class='help-block'>Merge this article with another:</p>
-        <input type="hidden" name="merge_with" id="merge_with" value="" />
+        <input type="hidden" name="id" value="<%= @article.id %>">
         <input type="text" name="merge_with" id="merge_with" value="" />
-      <%= link_to("Merge", {:controller => '/articles', :action => 'merge', :id => @article.id}, {:target => 'new', :class => 'btn info'}) if @article.id %>
-    <% end %>
+        <div><%= submit_tag 'Merge' %></div>
+    <% end -%>
   </div> 
   </div>
 
