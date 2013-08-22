@@ -28,9 +28,6 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def edit
-    if params[:merge_with]
-        merge
-    else
         @article = Article.find(params[:id])
         unless @article.access_by? current_user
           redirect_to :action => 'index'
@@ -38,7 +35,6 @@ class Admin::ContentController < Admin::BaseController
           return
         end
         new_or_edit
-    end
   end
   
   #hw1
