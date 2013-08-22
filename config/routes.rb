@@ -105,8 +105,6 @@ Rails.application.routes.draw do
     match "#{i}(/:action(/:id))", :to => i, :id => nil, :format => false
   end
     
-    map.connect "admin/content/merge", :controller => 'admin/content', :action => 'merge'
-    
   # Admin/XController
   %w{advanced cache categories comments content profiles feedback general pages
      resources sidebar textfilters themes trackbacks users settings tags redirects seo post_types }.each do |i|
@@ -114,7 +112,11 @@ Rails.application.routes.draw do
     match "/admin/#{i}(/:action(/:id))", :to => "admin/#{i}", :action => nil, :id => nil, :format => false
   end
 
-
+resources :admin do
+  resources :content do
+    post 'merge', :on => :merge
+  end
+end
 
   # default
   root :to  => 'articles#index', :format => false
