@@ -70,15 +70,14 @@ class Article < Content
       self.settings = {}
     end
   end
-  
+
   def merge( articleMergeWith )
-      mergedArticle = Article.new()
+      mergedArticle = Article.get_or_build_article()
       mergedArticle.title = self.title
       mergedArticle.user = self.user
       mergedArticle.body = self.body + articleMergeWith.body
-      mergedArticle.body_html = self.body_html + articleMergeWith.body_html
       mergedArticle.comments << self.comments << articleMergeWith.comments
-      mergedArticle.save!
+      mergedArticle.save
       return mergedArticle
   end
 
@@ -115,10 +114,10 @@ class Article < Content
     end
 
     def search_with_pagination(search_hash, paginate_hash)
-      
+
       state = (search_hash[:state] and ["no_draft", "drafts", "published", "withdrawn", "pending"].include? search_hash[:state]) ? search_hash[:state] : 'no_draft'
-      
-      
+
+
       list_function  = ["Article.#{state}"] + function_search_no_draft(search_hash)
 
       if search_hash[:category] and search_hash[:category].to_i > 0
