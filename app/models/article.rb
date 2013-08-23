@@ -72,13 +72,13 @@ class Article < Content
   end
 
   def merge( articleMergeWith )
-      mergedArticle = Article.get_or_build_article()
-      mergedArticle.title = self.title
-      mergedArticle.user = self.user
-      mergedArticle.body = articleMergeWith.body + " " + self.body
-      mergedArticle.comments << articleMergeWith.comments << self.comments
+      mergedArticle = self #Article.get_or_build_article()
+      mergedArticle.title = #self.title
+      mergedArticle.user = #self.user
+      mergedArticle.body += articleMergeWith.body #+ " " + self.body
+      mergedArticle.comments << articleMergeWith.comments # << self.comments
       mergedArticle.save
-	self.destroy
+	# self.destroy
 	articleMergeWith.destroy
 	
       return mergedArticle
