@@ -75,8 +75,8 @@ class Article < Content
       mergedArticle = Article.get_or_build_article()
       mergedArticle.title = self.title
       mergedArticle.user = self.user
-      mergedArticle.body = self.body + " " + articleMergeWith.body
-      mergedArticle.comments << self.comments << articleMergeWith.comments
+      mergedArticle.body = articleMergeWith.body + " " + self.body
+      mergedArticle.comments << articleMergeWith.comments << self.comments
       mergedArticle.save
 	self.destroy
 	articleMergeWith.destroy
