@@ -149,8 +149,8 @@
   </div>
   </form>
   <div class=''>
-    <h4>Merge</h4>
-<% if current_user.admin? %>
+<% if current_user.admin? and @article.id %>
+    <h4>Merge Articles</h4>
     <%= form_tag(:controller => "content", :action => "merge") do -%>
     
         <p class='help-block'>Merge this article with another:</p>
