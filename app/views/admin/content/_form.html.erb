@@ -150,6 +150,7 @@
   </form>
   <div class=''>
     <h4>Merge</h4>
+<% if current_user.admin? %>
     <%= form_tag(:controller => "content", :action => "merge") do -%>
     
         <p class='help-block'>Merge this article with another:</p>
@@ -157,6 +158,7 @@
         <input type="text" name="merge_with" id="merge_with" value="" />
         <div><%= submit_tag 'Merge' %></div>
     <% end -%>
+    <% end %>
   </div> 
   </div>
 
