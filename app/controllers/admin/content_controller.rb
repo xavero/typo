@@ -43,7 +43,7 @@ class Admin::ContentController < Admin::BaseController
     articleMergeWith = Article.find(params[:merge_with])
     @article = articleBase.merge( articleMergeWith )
     
-    redirect_to :action => 'index'
+    redirect_to :action => 'edit', :id => params[:id]
   end
 
   def destroy
